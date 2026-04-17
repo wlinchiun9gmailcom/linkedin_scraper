@@ -1,17 +1,15 @@
 """LinkedIn Scraper - Async Playwright-based scraper for LinkedIn."""
 
-# Version
 __version__ = "3.1.1"
 
-# Core modules
 from .core import (
     BrowserManager,
+    PersistentBrowserManager,
     login_with_credentials,
     login_with_cookie,
     is_logged_in,
     wait_for_manual_login,
     load_credentials_from_env,
-    # Exceptions
     LinkedInScraperException,
     AuthenticationError,
     RateLimitError,
@@ -21,16 +19,15 @@ from .core import (
     ScrapingError,
 )
 
-# Scrapers
 from .scrapers import (
     PersonScraper,
     CompanyScraper,
     JobScraper,
     JobSearchScraper,
     CompanyPostsScraper,
+    PersonPostsScraper,
 )
 
-# Callbacks
 from .callbacks import (
     ProgressCallback,
     ConsoleCallback,
@@ -39,7 +36,6 @@ from .callbacks import (
     MultiCallback,
 )
 
-# Models
 from .models import (
     Person,
     Experience,
@@ -55,22 +51,20 @@ from .models import (
 )
 
 __all__ = [
-    # Version
     "__version__",
-    # Core
     "BrowserManager",
+    "PersistentBrowserManager",
     "login_with_credentials",
     "login_with_cookie",
     "is_logged_in",
     "wait_for_manual_login",
     "load_credentials_from_env",
-    # Scrapers
     "PersonScraper",
     "CompanyScraper",
     "JobScraper",
     "JobSearchScraper",
     "CompanyPostsScraper",
-    # Exceptions
+    "PersonPostsScraper",
     "LinkedInScraperException",
     "AuthenticationError",
     "RateLimitError",
@@ -78,13 +72,11 @@ __all__ = [
     "ProfileNotFoundError",
     "NetworkError",
     "ScrapingError",
-    # Callbacks
     "ProgressCallback",
     "ConsoleCallback",
     "SilentCallback",
     "JSONLogCallback",
     "MultiCallback",
-    # Models
     "Person",
     "Experience",
     "Education",

@@ -6,12 +6,14 @@ from .company import CompanyScraper
 from .job import JobScraper
 from .job_search import JobSearchScraper
 from .company_posts import CompanyPostsScraper
+from .person_posts import PersonPostsScraper
 
 __all__ = [
-    'BaseScraper',
-    'PersonScraper',
-    'CompanyScraper',
-    'JobScraper',
-    'JobSearchScraper',
-    'CompanyPostsScraper',
+    "BaseScraper",
+    "PersonScraper",
+    "CompanyScraper",
+    "JobScraper",
+    "JobSearchScraper",
+    "CompanyPostsScraper",
+    "PersonPostsScraper",
 ]

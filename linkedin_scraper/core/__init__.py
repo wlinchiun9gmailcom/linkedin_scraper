@@ -1,13 +1,13 @@
-"""Core modules for LinkedIn scraper."""
+"""Core browser and auth utilities."""
 
 from .browser import BrowserManager
+from .persistent_browser import PersistentBrowserManager
 from .auth import (
     login_with_credentials,
     login_with_cookie,
     is_logged_in,
     wait_for_manual_login,
     load_credentials_from_env,
-    warm_up_browser
 )
 from .exceptions import (
     LinkedInScraperException,
@@ -16,46 +16,38 @@ from .exceptions import (
     ElementNotFoundError,
     ProfileNotFoundError,
     NetworkError,
-    ScrapingError
+    ScrapingError,
 )
 from .utils import (
-    retry_async,
     detect_rate_limit,
-    wait_for_element_smart,
-    extract_text_safe,
     scroll_to_bottom,
     scroll_to_half,
     click_see_more_buttons,
     handle_modal_close,
-    is_page_loaded
+    extract_text_safe,
+    retry_async,
 )
 
 __all__ = [
-    # Browser
-    'BrowserManager',
-    # Auth
-    'login_with_credentials',
-    'login_with_cookie',
-    'is_logged_in',
-    'wait_for_manual_login',
-    'load_credentials_from_env',
-    'warm_up_browser',
-    # Exceptions
-    'LinkedInScraperException',
-    'AuthenticationError',
-    'RateLimitError',
-    'ElementNotFoundError',
-    'ProfileNotFoundError',
-    'NetworkError',
-    'ScrapingError',
-    # Utils
-    'retry_async',
-    'detect_rate_limit',
-    'wait_for_element_smart',
-    'extract_text_safe',
-    'scroll_to_bottom',
-    'scroll_to_half',
-    'click_see_more_buttons',
-    'handle_modal_close',
-    'is_page_loaded',
+    "BrowserManager",
+    "PersistentBrowserManager",
+    "login_with_credentials",
+    "login_with_cookie",
+    "is_logged_in",
+    "wait_for_manual_login",
+    "load_credentials_from_env",
+    "LinkedInScraperException",
+    "AuthenticationError",
+    "RateLimitError",
+    "ElementNotFoundError",
+    "ProfileNotFoundError",
+    "NetworkError",
+    "ScrapingError",
+    "detect_rate_limit",
+    "scroll_to_bottom",
+    "scroll_to_half",
+    "click_see_more_buttons",
+    "handle_modal_close",
+    "extract_text_safe",
+    "retry_async",
 ]

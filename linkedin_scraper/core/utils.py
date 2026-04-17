@@ -54,57 +54,107 @@ def retry_async(
     return decorator
 
 
-async def detect_rate_limit(page: Page) -> None:
-    """
-    Detect if LinkedIn has rate limited the session.
+# async def detect_rate_limit(page: Page) -> None:
+#     """
+#     Detect if LinkedIn has rate limited the session.
     
-    Args:
-        page: Playwright page object
+#     Args:
+#         page: Playwright page object
         
-    Raises:
-        RateLimitError: If rate limiting is detected
+#     Raises:
+#         RateLimitError: If rate limiting is detected
+#     """
+#     # Check for common rate limit indicators
+    
+#     # Check URL for security challenges
+#     current_url = page.url
+#     if 'linkedin.com/checkpoint' in current_url or 'authwall' in current_url:
+#         raise RateLimitError(
+#             "LinkedIn security checkpoint detected. "
+#             "You may need to verify your identity or wait before continuing.",
+#             suggested_wait_time=3600  # 1 hour
+#         )
+    
+#     # Check for CAPTCHA
+#     try:
+#         captcha = await page.locator('iframe[title*="captcha" i], iframe[src*="captcha" i]').count()
+#         if captcha > 0:
+#             raise RateLimitError(
+#                 "CAPTCHA challenge detected. Manual intervention required.",
+#                 suggested_wait_time=3600
+#             )
+#     except Exception:
+#         pass
+    
+#     # Check for rate limit messages
+#     try:
+#         body_text = await page.locator('body').text_content(timeout=1000)
+#         if body_text:
+#             body_lower = body_text.lower()
+#             if any(phrase in body_lower for phrase in [
+#                 'too many requests',
+#                 'rate limit',
+#                 'slow down',
+#                 'try again later'
+#             ]):
+#                 raise RateLimitError(
+#                     "Rate limit message detected on page.",
+#                     suggested_wait_time=1800  # 30 minutes
+#                 )
+#     except PlaywrightTimeoutError:
+#         pass
+
+async def detect_rate_limit(page):
     """
-    # Check for common rate limit indicators
-    
-    # Check URL for security challenges
-    current_url = page.url
-    if 'linkedin.com/checkpoint' in current_url or 'authwall' in current_url:
-        raise RateLimitError(
-            "LinkedIn security checkpoint detected. "
-            "You may need to verify your identity or wait before continuing.",
-            suggested_wait_time=3600  # 1 hour
-        )
-    
-    # Check for CAPTCHA
+    Detect actual LinkedIn rate limit / checkpoint / authwall pages.
+
+    This version is intentionally stricter than broad keyword matching,
+    because generic words like "challenge" or "verify" can appear on normal pages.
+    """
+    url = page.url
+    title = await page.title()
+    content = await page.content()
+
+    lower_url = url.lower()
+    lower_title = title.lower()
+    lower_content = content.lower()
+
+    # Save debug artifacts every time this check runs
     try:
-        captcha = await page.locator('iframe[title*="captcha" i], iframe[src*="captcha" i]').count()
-        if captcha > 0:
+        with open("debug_rate_limit.html", "w", encoding="utf-8") as f:
+            f.write(content)
+
+        body_text = await page.locator("body").inner_text()
+        with open("debug_rate_limit.txt", "w", encoding="utf-8") as f:
+            f.write(f"URL: {url}\n")
+            f.write(f"TITLE: {title}\n\n")
+            f.write(body_text[:5000])
+    except Exception as e:
+        print(f"[DEBUG] Failed to save debug files: {e}")
+
+    print("\n[DEBUG] detect_rate_limit() check")
+    print("[DEBUG] URL:", url)
+    print("[DEBUG] TITLE:", title)
+
+    strong_indicators = [
+        "linkedin.com/checkpoint/",
+        "linkedin.com/authwall",
+        "/uas/login",
+        "captcha",
+        "verify that you're a human",
+        "unusual activity from your account",
+        "temporarily restricted",
+        "let us know you're not a robot",
+        "security verification",
+    ]
+
+    haystack = f"{lower_url}\n{lower_title}\n{lower_content}"
+
+    for indicator in strong_indicators:
+        if indicator in haystack:
             raise RateLimitError(
-                "CAPTCHA challenge detected. Manual intervention required.",
-                suggested_wait_time=3600
+                f"Rate limit / checkpoint page detected. Matched indicator: {indicator}"
             )
-    except Exception:
-        pass
-    
-    # Check for rate limit messages
-    try:
-        body_text = await page.locator('body').text_content(timeout=1000)
-        if body_text:
-            body_lower = body_text.lower()
-            if any(phrase in body_lower for phrase in [
-                'too many requests',
-                'rate limit',
-                'slow down',
-                'try again later'
-            ]):
-                raise RateLimitError(
-                    "Rate limit message detected on page.",
-                    suggested_wait_time=1800  # 30 minutes
-                )
-    except PlaywrightTimeoutError:
-        pass
-
-
 async def wait_for_element_smart(
     page: Page,
     selector: str,

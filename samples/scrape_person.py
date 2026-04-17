@@ -11,7 +11,7 @@ from linkedin_scraper.core.browser import BrowserManager
 
 async def main():
     """Scrape a single person profile"""
-    profile_url = "https://www.linkedin.com/in/williamhgates/"
+    profile_url = "https://www.linkedin.com/in/jade-mon/"
     
     # Initialize and start browser using context manager
     async with BrowserManager(headless=False) as browser:
