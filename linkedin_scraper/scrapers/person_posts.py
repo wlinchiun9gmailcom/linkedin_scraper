@@ -22,7 +22,13 @@ class PersonPostsScraper(BaseScraper):
         await self.ensure_logged_in()
 
         posts_url = self._build_activity_url(profile_url)
-        await self.navigate_and_wait(posts_url)
+
+        try:
+            await self.navigate_and_wait(posts_url)
+        except Exception as e:
+            logger.warning(f"Navigation/checkpoint warning on activity page: {e}")
+            raise
+
         await self.callback.on_progress("Navigated to activity page", 10)
 
         await self.check_rate_limit()
@@ -94,12 +100,69 @@ class PersonPostsScraper(BaseScraper):
         )
         await self.page.wait_for_timeout(1200)
 
+    async def _expand_all_posts(self) -> None:
+        """
+        Expand truncated post text before extraction.
+        Uses Playwright-level clicks so LinkedIn has time to update the DOM.
+        """
+        selectors = [
+            "button",
+            "span[role='button']",
+        ]
+
+        for _ in range(3):
+            clicked_any = False
+
+            for selector in selectors:
+                elements = await self.page.locator(selector).all()
+
+                for el in elements:
+                    try:
+                        text = (await el.inner_text()).strip().lower()
+                    except Exception:
+                        continue
+
+                    try:
+                        aria = ((await el.get_attribute("aria-label")) or "").strip().lower()
+                    except Exception:
+                        aria = ""
+
+                    is_more = (
+                        text in {"…more", "...more", "more"} or
+                        "see more" in text or
+                        "see more" in aria
+                    )
+
+                    if not is_more:
+                        continue
+
+                    try:
+                        await el.scroll_into_view_if_needed(timeout=2000)
+                    except Exception:
+                        pass
+
+                    try:
+                        await el.click(timeout=2000)
+                        clicked_any = True
+                        await self.page.wait_for_timeout(300)
+                    except Exception:
+                        pass
+
+            if not clicked_any:
+                break
+
+            await self.page.wait_for_timeout(1000)
+
     async def _scrape_posts(self, limit: int, profile_name: Optional[str]) -> List[Post]:
         posts: List[Post] = []
         scroll_count = 0
         max_scrolls = max(4, (limit // 3) + 2)
 
         while len(posts) < limit and scroll_count < max_scrolls:
+            await self.page.wait_for_timeout(1200)
+            await self._expand_all_posts()
+            await self.page.wait_for_timeout(800)
+
             new_posts = await self._extract_posts_from_page(profile_name=profile_name)
 
             for post in new_posts:
@@ -122,6 +185,45 @@ class PersonPostsScraper(BaseScraper):
                     document.querySelectorAll('[data-urn^="urn:li:activity:"]')
                 );
                 const seen = new Set();
+
+                const getBestText = (el) => {
+                    const textSelectors = [
+                        '.feed-shared-update-v2__description',
+                        '.update-components-text',
+                        '.feed-shared-text',
+                        '[data-test-id="main-feed-activity-card__commentary"]',
+                        '.break-words.whitespace-pre-wrap'
+                    ];
+
+                    let best = '';
+                    for (const sel of textSelectors) {
+                        const nodes = Array.from(el.querySelectorAll(sel));
+                        for (const node of nodes) {
+                            const t = (node.innerText || node.textContent || '').trim();
+                            if (t.length > best.length) {
+                                best = t;
+                            }
+                        }
+                    }
+
+                    return best.replace(/\\n\\s*…more\\s*$/i, '').trim();
+                };
+
+                const getCountText = (el, selectors) => {
+                    for (const sel of selectors) {
+                        const nodes = Array.from(el.querySelectorAll(sel));
+                        for (const node of nodes) {
+                            const txt = (
+                                node.getAttribute('aria-label') ||
+                                node.innerText ||
+                                node.textContent ||
+                                ''
+                            ).trim();
+                            if (txt) return txt;
+                        }
+                    }
+                    return '';
+                };
 
                 for (const el of cards) {
                     const urn = el.getAttribute('data-urn');
@@ -167,23 +269,7 @@ class PersonPostsScraper(BaseScraper):
                         }
                     }
 
-                    let text = '';
-                    const textSelectors = [
-                        '.feed-shared-update-v2__description',
-                        '.update-components-text',
-                        '.feed-shared-text',
-                        '[data-test-id="main-feed-activity-card__commentary"]',
-                        '.break-words.whitespace-pre-wrap'
-                    ];
-
-                    for (const sel of textSelectors) {
-                        const node = el.querySelector(sel);
-                        const t = node?.innerText?.trim() || '';
-                        if (t.length > text.length) {
-                            text = t;
-                        }
-                    }
-
+                    const text = getBestText(el);
                     if (!text || text.length < 10) {
                         continue;
                     }
@@ -193,11 +279,22 @@ class PersonPostsScraper(BaseScraper):
                     );
                     const timeText = timeNode?.innerText?.trim() || '';
 
-                    const reactionsNode = el.querySelector(
-                        'button[aria-label*="reaction"], [class*="social-details-social-counts__reactions"]'
-                    );
-                    const commentsNode = el.querySelector('button[aria-label*="comment"]');
-                    const repostsNode = el.querySelector('button[aria-label*="repost"]');
+                    const reactionsText = getCountText(el, [
+                        '[aria-label*="reaction"]',
+                        '[aria-label*="reactions"]',
+                        '[class*="social-details-social-counts__reactions"]',
+                        '[class*="social-details-social-counts"]'
+                    ]);
+
+                    const commentsText = getCountText(el, [
+                        'button[aria-label*="comment"]',
+                        '[aria-label*="comments"]'
+                    ]);
+
+                    const repostsText = getCountText(el, [
+                        'button[aria-label*="repost"]',
+                        '[aria-label*="reposts"]'
+                    ]);
 
                     const images = [];
                     el.querySelectorAll('img[src]').forEach((img) => {
@@ -215,11 +312,11 @@ class PersonPostsScraper(BaseScraper):
                     results.push({
                         urn,
                         actor,
-                        text: text.slice(0, 4000),
+                        text: text.slice(0, 20000),
                         timeText,
-                        reactions: reactionsNode?.innerText || '',
-                        comments: commentsNode?.innerText || '',
-                        reposts: repostsNode?.innerText || '',
+                        reactions: reactionsText,
+                        comments: commentsText,
+                        reposts: repostsText,
                         images
                     });
                 }

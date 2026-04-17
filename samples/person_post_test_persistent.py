@@ -48,7 +48,7 @@ async def main():
             print(f"Reactions: {post.reactions_count}")
             print(f"Comments: {post.comments_count}")
             print(f"Reposts: {post.reposts_count}")
-            print(f"Text: {(post.text or '')[:500]}")
+            print(f"Text: {(post.text or '')}")
             print("-" * 80)
 
 
