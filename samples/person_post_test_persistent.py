@@ -21,7 +21,7 @@ async def main():
         print("Current URL before scrape:", browser.page.url)
         print("Current title before scrape:", await browser.page.title())
         print("\nIf LinkedIn shows any checkpoint/CAPTCHA, clear it manually in the browser.")
-        input("Press Enter to continue...")
+        # input("Press Enter to continue...")
 
         scraper = PersonPostsScraper(browser.page)
 
@@ -30,7 +30,7 @@ async def main():
         except RateLimitError as e:
             print(f"\nRate-limit / CAPTCHA page detected: {e}")
             print("Please clear it manually in the open browser window.")
-            input("After clearing the challenge and confirming the Activity page is visible, press Enter...")
+            # input("After clearing the challenge and confirming the Activity page is visible, press Enter...")
 
             activity_url = PROFILE_URL.rstrip("/") + "/recent-activity/all/"
             await browser.goto(activity_url, wait_until="domcontentloaded")
