@@ -1,0 +1,790 @@
+WEBVTT
+
+00:00:01.430 --> 00:00:05.016
+Hi, my name is John Valti. This is a short talk about our
+
+00:00:05.016 --> 00:00:08.530
+AER retrospective Learning from Interruption.
+
+00:00:08.530 --> 00:00:12.656
+This paper will be resented in ACL 225 and this is book is
+
+00:00:12.656 --> 00:00:16.642
+a short version of what I'll resent there. This work was
+
+00:00:16.642 --> 00:00:20.950
+led by my PhD student, so he can.
+
+00:00:21.410 --> 00:00:25.691
+The context folders work. Is this very common view on LLM
+
+00:00:25.691 --> 00:00:30.850
+lifecycle where we separate between training and deployment?
+
+00:00:30.850 --> 00:00:34.250
+In training we are mostly using static data.
+
+00:00:34.250 --> 00:00:38.365
+A lot of raw data for retraining or expensive annotate data
+
+00:00:38.365 --> 00:00:42.120
+annotated data for OST training.
+
+00:00:42.120 --> 00:00:45.044
+In deployment, on the other hand, the data is very
+
+00:00:45.044 --> 00:00:48.254
+different. It's much more dynamic, it's conversational.
+
+00:00:48.254 --> 00:00:50.949
+These interactions create tons of data that is
+
+00:00:50.949 --> 00:00:54.332
+fundamentally different, and it does not follow and follow
+
+00:00:54.332 --> 00:00:56.940
+the nonstationary distribution.
+
+00:00:56.940 --> 00:00:58.430
+And largely.
+
+00:00:58.430 --> 00:01:03.180
+There is no learning happening during this deployment stage.
+
+00:01:03.220 --> 00:01:04.600
+However.
+
+00:01:04.600 --> 00:01:07.717
+These interactions that the model participates in during
+
+00:01:07.717 --> 00:01:10.910
+deployments are rich with learning signals.
+
+00:01:10.910 --> 00:01:14.870
+And even more important, they're always on distribution.
+
+00:01:14.870 --> 00:01:18.306
+This creates a lot of opportunities O adaptation and
+
+00:01:18.306 --> 00:01:21.872
+personalization, acquiring new knowledge to update the
+
+00:01:21.872 --> 00:01:26.200
+model, and overall reduction in training costs.
+
+00:01:26.200 --> 00:01:29.989
+The gist of this paper is that we can learn from observed
+
+00:01:29.989 --> 00:01:33.940
+conversational behavior in such interactions.
+
+00:01:33.940 --> 00:01:37.690
+And the reason for that is that conversational interactions
+
+00:01:37.690 --> 00:01:41.252
+send multiple turns. This creates opportunities to learn
+
+00:01:41.252 --> 00:01:43.600
+from observed behavior.
+
+00:01:43.600 --> 00:01:48.253
+Model outputs naturally or naturally followed by human
+
+00:01:48.253 --> 00:01:50.380
+responses.
+
+00:01:50.380 --> 00:01:53.851
+These responses are influenced by the model output and its
+
+00:01:53.851 --> 00:01:56.911
+quality, and this creates an observed behavior that
+
+00:01:56.911 --> 00:02:00.810
+captures a very informative learning signal.
+
+00:02:00.810 --> 00:02:03.130
+How does this signal look like?
+
+00:02:03.130 --> 00:02:06.611
+Interlocutors dynamically adjust their behavior based on
+
+00:02:06.611 --> 00:02:08.530
+partner behavior.
+
+00:02:08.530 --> 00:02:12.819
+Speaker utterances or behavior following an interlocutor
+
+00:02:12.819 --> 00:02:16.958
+response and code feedback about the response, even if
+
+00:02:16.958 --> 00:02:20.871
+implicitly. Errors may elicit rephrasing, pivoting,
+
+00:02:20.871 --> 00:02:24.370
+scalding, direct corrections, etc.
+
+00:02:24.370 --> 00:02:28.007
+For example, in this comic strip, Charlie Brown received
+
+00:02:28.007 --> 00:02:31.516
+and decoded feedback about how to lose and maybe, just
+
+00:02:31.516 --> 00:02:35.080
+maybe, he will do better next time.
+
+00:02:35.080 --> 00:02:38.385
+On the other hand, correct responses elicit very different
+
+00:02:38.385 --> 00:02:41.467
+behavior. They may lead to building on top of what was
+
+00:02:41.467 --> 00:02:45.110
+communicated or even explicit phrase.
+
+00:02:45.110 --> 00:02:48.234
+In this work, we resent an approach called respect, which
+
+00:02:48.234 --> 00:02:50.990
+stands for learned retrospectively.
+
+00:02:50.990 --> 00:02:54.562
+It's an approach to autonomously learn from these kind of
+
+00:02:54.562 --> 00:02:58.072
+signals without any annotation or human intervention. It
+
+00:02:58.072 --> 00:02:59.860
+has three stages.
+
+00:02:59.860 --> 00:03:03.531
+In the first stage, we deployed the model to interact with
+
+00:03:03.531 --> 00:03:07.264
+users in conversational interactions. We then in the second
+
+00:03:07.264 --> 00:03:10.935
+stage, retrospect, we use the same model that participated
+
+00:03:10.935 --> 00:03:12.880
+in the interruption.
+
+00:03:12.880 --> 00:03:17.207
+To the code feedback based on the follow human responses
+
+00:03:17.207 --> 00:03:21.840
+and utterances or behavior about the model actions.
+
+00:03:21.840 --> 00:03:25.533
+This is very different than using than the conventional use
+
+00:03:25.533 --> 00:03:27.580
+of AI as a judge.
+
+00:03:27.580 --> 00:03:30.710
+The model here does not judge the quality of its own
+
+00:03:30.710 --> 00:03:34.194
+outputs, and as you will see later in our set, it actually
+
+00:03:34.194 --> 00:03:37.460
+does not have the ability to do that.
+
+00:03:37.460 --> 00:03:41.608
+Instead, it analyzes follow human utterances and from there
+
+00:03:41.608 --> 00:03:45.686
+the codes feedback about the action that receded them, the
+
+00:03:45.686 --> 00:03:49.800
+model action that receded them.
+
+00:03:49.800 --> 00:03:53.346
+We take. We then take this feedback and in the last stage
+
+00:03:53.346 --> 00:03:58.170
+convert it into training signals and retrain the model.
+
+00:03:58.170 --> 00:04:00.783
+And this kind of process there is a very interesting
+
+00:04:00.783 --> 00:04:02.510
+cyclical influence.
+
+00:04:02.510 --> 00:04:05.758
+Training influences deployment, and deployment influences
+
+00:04:05.758 --> 00:04:07.680
+decoded feedback.
+
+00:04:07.680 --> 00:04:12.090
+This raises questions about what are the long term dynamics.
+
+00:04:12.090 --> 00:04:13.440
+Study that.
+
+00:04:13.440 --> 00:04:16.798
+We deployed this process in a continual learning set where
+
+00:04:16.798 --> 00:04:21.320
+we repeat this process again and again in multiple rounds.
+
+00:04:21.320 --> 00:04:25.129
+This allows us to observe long term trends and also to
+
+00:04:25.129 --> 00:04:28.620
+evaluate the effectiveness of our model.
+
+00:04:28.620 --> 00:04:32.175
+Because as we train, as we train, at the end of each round,
+
+00:04:32.175 --> 00:04:35.672
+we'll observe how how much the model improved by deploying
+
+00:04:35.672 --> 00:04:41.030
+it in the next round and observing the model in the wild.
+
+00:04:41.030 --> 00:04:45.270
+So what is inside each stage first interaction scenario?
+
+00:04:45.270 --> 00:04:47.928
+We design the lab scenario to support the research,
+
+00:04:47.928 --> 00:04:50.996
+revealing the critical challenges and the properties of the
+
+00:04:50.996 --> 00:04:54.220
+interaction that we are interested in studying.
+
+00:04:54.220 --> 00:04:57.789
+While at the same time scoping the research challenge, the
+
+00:04:57.789 --> 00:05:00.995
+research and the learning problem to enable research
+
+00:05:00.995 --> 00:05:04.030
+constrained research in a lab.
+
+00:05:04.030 --> 00:05:08.230
+We introduce Multi ref. Multi ref is a generalization of
+
+00:05:08.230 --> 00:05:12.653
+the well studied and referenced game scenario. A well tried
+
+00:05:12.653 --> 00:05:16.410
+workhorse in cognitive science in no.
+
+00:05:16.410 --> 00:05:19.438
+There are several key differences between multi ref and
+
+00:05:19.438 --> 00:05:21.160
+reference game.
+
+00:05:21.160 --> 00:05:24.568
+1st instead of selecting a single target like we do in the
+
+00:05:24.568 --> 00:05:27.620
+reference in traditional reference case.
+
+00:05:27.620 --> 00:05:31.376
+Here we select a sub in multi. If we select a subset of the
+
+00:05:31.376 --> 00:05:35.910
+targets, this has dramatic influence on the solution space.
+
+00:05:35.910 --> 00:05:38.932
+Rather than the solution space being the number of targets
+
+00:05:38.932 --> 00:05:41.790
+that are observed by the participants.
+
+00:05:41.790 --> 00:05:45.525
+It's any possible subset, which means it's a. It's a very
+
+00:05:45.525 --> 00:05:48.530
+large combinatorial space.
+
+00:05:48.530 --> 00:05:51.940
+And this naturally lends itself to gradual construction of
+
+00:05:51.940 --> 00:05:55.294
+the solution O. Instead of a single tier interaction like
+
+00:05:55.294 --> 00:05:58.705
+we see in reference games, we have a multiterm interaction
+
+00:05:58.705 --> 00:06:02.000
+expressing all the properties of interaction that we are
+
+00:06:02.000 --> 00:06:04.410
+interested in studying.
+
+00:06:04.410 --> 00:06:09.180
+In our deployment, the model takes the listener role.
+
+00:06:09.680 --> 00:06:12.624
+This is how the multi reffing interaction looks like. We
+
+00:06:12.624 --> 00:06:15.672
+have two participants, The human is always the speaker and
+
+00:06:15.672 --> 00:06:18.530
+the model is always listener.
+
+00:06:18.530 --> 00:06:21.242
+They both observe a set of images. These labels are
+
+00:06:21.242 --> 00:06:23.903
+shuffled between their perspectives, so they can't
+
+00:06:23.903 --> 00:06:26.780
+communicate by just pointing to a label.
+
+00:06:26.780 --> 00:06:29.732
+The human gets a set of targets and their goal is to
+
+00:06:29.732 --> 00:06:32.963
+communicate them to the listener. So the listener selects
+
+00:06:32.963 --> 00:06:36.880
+these targets and now no other images.
+
+00:06:36.880 --> 00:06:40.967
+This interaction starts by the human, by human generating
+
+00:06:40.967 --> 00:06:45.570
+the utterance and diamond and men without legs.
+
+00:06:45.570 --> 00:06:48.398
+In response to this utterance, the model select image I,
+
+00:06:48.398 --> 00:06:51.226
+which is appropriate in this case and is also one of the
+
+00:06:51.226 --> 00:06:54.560
+target, so it is likely a desired behavior.
+
+00:06:54.560 --> 00:06:58.880
+The human continues and says another diamond headband.
+
+00:06:58.880 --> 00:07:01.780
+Now the model select image C, which does not seem like a
+
+00:07:01.780 --> 00:07:04.783
+terrible mistake, but it's not one of the targets, so it's
+
+00:07:04.783 --> 00:07:07.510
+likely an incorrect selection.
+
+00:07:07.510 --> 00:07:10.749
+Indeed, the human response to this to this utterance by
+
+00:07:10.749 --> 00:07:14.046
+implicitly correcting the model by refining the previous
+
+00:07:14.046 --> 00:07:17.402
+utterance, hoping that the model deselects the and select
+
+00:07:17.402 --> 00:07:19.610
+something else.
+
+00:07:19.610 --> 00:07:23.117
+Already these utterances you can see the very abstract a
+
+00:07:23.117 --> 00:07:26.810
+language that we observe in melter, in multi ref, very rich
+
+00:07:26.810 --> 00:07:31.190
+linguistic behavior and a lot of magmatic reasoning.
+
+00:07:31.190 --> 00:07:34.400
+In response to this utterance, the model deselects the
+
+00:07:34.400 --> 00:07:37.786
+correct as appropriate and selects G seems like the right
+
+00:07:37.786 --> 00:07:41.231
+there. It seems like the right selection. This interaction
+
+00:07:41.231 --> 00:07:44.675
+will continue until they run out of turns. This is turn 10
+
+00:07:44.675 --> 00:07:49.690
+turns in our case, or the correct subset is selected.
+
+00:07:49.690 --> 00:07:53.120
+So what do we have here? This scenario builds on reference
+
+00:07:53.120 --> 00:07:56.493
+schemes. It's a classic prototype in cognitive science to
+
+00:07:56.493 --> 00:07:59.924
+study communication and grounding. O. We are building here
+
+00:07:59.924 --> 00:08:03.413
+on decades and decades of research and studies in cognitive
+
+00:08:03.413 --> 00:08:05.730
+science and Anoop.
+
+00:08:05.730 --> 00:08:08.697
+For our visual stimuli, we use tangram images. We have a
+
+00:08:08.697 --> 00:08:11.612
+very diverse set of tangrams from the kilogram data set
+
+00:08:11.612 --> 00:08:14.260
+that we released a few years ago.
+
+00:08:14.260 --> 00:08:17.705
+These are abstract shapes. They are very hard and out of
+
+00:08:17.705 --> 00:08:20.310
+distribution for retrained Elms.
+
+00:08:20.310 --> 00:08:23.385
+This means we have a lot of room for improvement O we can
+
+00:08:23.385 --> 00:08:26.750
+really see the effect of our learning.
+
+00:08:26.750 --> 00:08:29.364
+They also have a very rich, rich and long history in
+
+00:08:29.364 --> 00:08:33.290
+cognitive science going back 4 decades in research.
+
+00:08:33.290 --> 00:08:36.116
+And that tells us, allows us to expect that it's in and
+
+00:08:36.116 --> 00:08:39.145
+indeed this is what we see in our experiment that we'll get
+
+00:08:39.145 --> 00:08:41.972
+very diverse description with a lot of obstructions and
+
+00:08:41.972 --> 00:08:43.740
+visual language.
+
+00:08:43.740 --> 00:08:47.199
+And finally, because we are building a complex solution, we
+
+00:08:47.199 --> 00:08:50.428
+have the multiturn interaction with rich dynamics, with
+
+00:08:50.428 --> 00:08:53.888
+corrections, rephrasing, pivots, all the kind of properties
+
+00:08:53.888 --> 00:08:57.290
+of interaction that we are interested in to take advantage
+
+00:08:57.290 --> 00:09:00.450
+of as our language signal.
+
+00:09:00.450 --> 00:09:03.495
+Didn't this kind of interaction we switched to the second
+
+00:09:03.495 --> 00:09:06.384
+stage of our process where we retrospectively the code
+
+00:09:06.384 --> 00:09:09.700
+feedback from these past interactions?
+
+00:09:09.700 --> 00:09:13.823
+The hypothesis underlying this work most important thing is
+
+00:09:13.823 --> 00:09:17.671
+that implicit conversational feedback is expressed in a
+
+00:09:17.671 --> 00:09:21.657
+relatively constrained way and a general way that is task
+
+00:09:21.657 --> 00:09:25.506
+independent. So the ability to decode it is potentially
+
+00:09:25.506 --> 00:09:28.740
+acquired mostly during pre training.
+
+00:09:28.740 --> 00:09:32.511
+And an Ellen can decode it even if it is terrible at the
+
+00:09:32.511 --> 00:09:35.540
+task of the interaction.
+
+00:09:35.540 --> 00:09:39.030
+Now, if an NLM can decode this kind of feedback from past
+
+00:09:39.030 --> 00:09:42.400
+interactions to infer a learning signal that it can use
+
+00:09:42.400 --> 00:09:45.711
+effectively, it can bootstrap and autonomously improve
+
+00:09:45.711 --> 00:09:48.960
+simply by interacting with users while completing it,
+
+00:09:48.960 --> 00:09:53.910
+completing its task and what it's supposed to do.
+
+00:09:54.280 --> 00:09:57.547
+We take the simplest possible approach to the coded signal
+
+00:09:57.547 --> 00:09:59.510
+and we use prompting.
+
+00:09:59.510 --> 00:10:01.350
+We design a general.
+
+00:10:01.350 --> 00:10:05.080
+That's the Gnostic text only prompt with minimal design. In
+
+00:10:05.080 --> 00:10:08.811
+our case. The fact that this is a textonly prompt is really
+
+00:10:08.811 --> 00:10:12.418
+important because this really allows us to control if the
+
+00:10:12.418 --> 00:10:15.962
+model is judging its own actions, the quality of its own
+
+00:10:15.962 --> 00:10:17.680
+actions directly.
+
+00:10:17.680 --> 00:10:21.123
+It cannot do this in this case because the model does not
+
+00:10:21.123 --> 00:10:25.790
+observe the images the participants are referring to.
+
+00:10:25.790 --> 00:10:28.666
+Our product is extremely simple. We have a set of
+
+00:10:28.666 --> 00:10:32.002
+instructions, we have the history of the interaction text
+
+00:10:32.002 --> 00:10:35.281
+only the model action and the follow utterances from the
+
+00:10:35.281 --> 00:10:38.160
+user, from the human participant.
+
+00:10:38.160 --> 00:10:41.627
+We then asked the code two types of feedback. We either do
+
+00:10:41.627 --> 00:10:45.035
+a freeway feedback, positive, neutral, or negative. Or we
+
+00:10:45.035 --> 00:10:48.444
+experiment with a binary feedback, positive and negative.
+
+00:10:48.444 --> 00:10:51.970
+In this example we ask for positive, neutral, negative, and
+
+00:10:51.970 --> 00:10:55.910
+the decoded feedback is negative.
+
+00:10:56.340 --> 00:10:59.884
+Given this this decoded feedback in the last stage we
+
+00:10:59.884 --> 00:11:02.890
+converted into a training signal.
+
+00:11:02.890 --> 00:11:05.551
+We experiment with free training, free learning methods.
+
+00:11:05.551 --> 00:11:09.040
+Each of them has its own kind of conversion process.
+
+00:11:09.040 --> 00:11:12.108
+We use filtered finetuning where we only keep the examples
+
+00:11:12.108 --> 00:11:14.708
+with positive feedback and we simply maximize the
+
+00:11:14.708 --> 00:11:16.810
+likelihood.
+
+00:11:16.810 --> 00:11:20.096
+The experiment with reinforcement learning RL using a
+
+00:11:20.096 --> 00:11:23.383
+contextual bandit setting. We convert the feedback to
+
+00:11:23.383 --> 00:11:26.791
+positive and negative awards and maximize the word with
+
+00:11:26.791 --> 00:11:28.510
+reinforce.
+
+00:11:28.510 --> 00:11:32.700
+And finally, we use the utility maximization with keto.
+
+00:11:32.700 --> 00:11:37.270
+Where we use keto with positive and negative feedback.
+
+00:11:37.270 --> 00:11:40.220
+So this is the complete process. We deploy virtual secular
+
+00:11:40.220 --> 00:11:43.220
+with the code feedback and retrain the model and you repeat
+
+00:11:43.220 --> 00:11:45.970
+this process again and again.
+
+00:11:45.970 --> 00:11:49.423
+Our experiments We run concurrent randomized deployments
+
+00:11:49.423 --> 00:11:50.880
+with humans.
+
+00:11:50.880 --> 00:11:54.717
+We vary the feedback decoding, binary versus ternary, and
+
+00:11:54.717 --> 00:11:58.289
+the training methods using the free algorithms I just
+
+00:11:58.289 --> 00:12:01.729
+described. We deploy 6 systems for three rounds and
+
+00:12:01.729 --> 00:12:05.236
+continue with the winner for another free rounds. To
+
+00:12:05.236 --> 00:12:09.073
+observe longer term trends for a model, we use Adfix 28B.
+
+00:12:09.073 --> 00:12:12.447
+It was the state-of-the-art multimodal LLM when we
+
+00:12:12.447 --> 00:12:16.280
+conducted these experiments.
+
+00:12:16.280 --> 00:12:20.090
+These are our main results. What we're seeing here is
+
+00:12:20.090 --> 00:12:24.042
+interaction success rate. We are seeing the six systems
+
+00:12:24.042 --> 00:12:27.993
+binary with FFT, ternary with FFT, binary with real and
+
+00:12:27.993 --> 00:12:32.227
+ternary with real and binary with keto and ternary with kto
+
+00:12:32.227 --> 00:12:36.461
+binary. Trinary stand for the feedback with the code either
+
+00:12:36.461 --> 00:12:40.483
+positive, negative or positive, neutral and negative. We
+
+00:12:40.483 --> 00:12:44.647
+also deploy here 2 systems control and human, human. Human
+
+00:12:44.647 --> 00:12:46.360
+human interactions are.
+
+00:12:46.360 --> 00:12:49.363
+Basically, at the 100% success rate within the allocated 10
+
+00:12:49.363 --> 00:12:51.866
+turns, the humans have sufficient time to correct
+
+00:12:51.866 --> 00:12:54.719
+themselves and complete the complete basically all tasks
+
+00:12:54.719 --> 00:12:56.760
+successfully.
+
+00:12:56.760 --> 00:13:00.705
+Overall, all the learning method 6 learn show effective
+
+00:13:00.705 --> 00:13:04.933
+dramatic show dramatic improvements and effective learning.
+
+00:13:04.933 --> 00:13:09.090
+The best learning methods and the one we continue with for
+
+00:13:09.090 --> 00:13:13.248
+six rounds is binary FFT, which is the simplest of the six
+
+00:13:13.248 --> 00:13:16.700
+methods. It's success rate over six rounds, it's
+
+00:13:16.700 --> 00:13:20.840
+interaction level, it goes for 31% to 82%.
+
+00:13:20.840 --> 00:13:23.985
+A big a big question, a confounding factor in this kind of
+
+00:13:23.985 --> 00:13:27.183
+experiments is how much human adaptation is contributing to
+
+00:13:27.183 --> 00:13:29.390
+the system improvement.
+
+00:13:29.390 --> 00:13:32.846
+So we take the initial model and we deploy it concurrently
+
+00:13:32.846 --> 00:13:36.244
+to the final binary FFT model in a randomized experiments
+
+00:13:36.244 --> 00:13:39.350
+and what we see that human adaptation is negligible,
+
+00:13:39.350 --> 00:13:42.865
+performance stays roughly the same, telling us that all the
+
+00:13:42.865 --> 00:13:46.263
+improvements is coming from the system actually improving
+
+00:13:46.263 --> 00:13:50.290
+its reasoning about keeping its capabilities.
+
+00:13:50.290 --> 00:13:53.462
+Filtered fine tuning works best, but overall most of the
+
+00:13:53.462 --> 00:13:56.467
+learning methods work relatively well and differences
+
+00:13:56.467 --> 00:13:59.720
+between them are relatively small.
+
+00:13:59.720 --> 00:14:02.908
+The only difference is KTO, which struggles potentially due
+
+00:14:02.908 --> 00:14:05.883
+to open problems in the item into the ITED optimization
+
+00:14:05.883 --> 00:14:09.250
+that happens throughout this process.
+
+00:14:09.250 --> 00:14:12.572
+Their level success rate, which is not visualized here,
+
+00:14:12.572 --> 00:14:16.014
+also improves dramatically from 30 to over 50. Turn level
+
+00:14:16.014 --> 00:14:19.574
+success rate is evaluated using a separate evaluation task.
+
+00:14:19.574 --> 00:14:22.897
+There are more details in the paper. There's also a lot
+
+00:14:22.897 --> 00:14:26.160
+more analysis in the paper. So if you're interested, I
+
+00:14:26.160 --> 00:14:29.661
+recommend you to give it a look to understand what kind of
+
+00:14:29.661 --> 00:14:33.780
+dynamics that happen over time in this process.
+
+00:14:33.780 --> 00:14:37.548
+So thank you very much and I'll point you to the air here.
+
+00:14:37.548 --> 00:14:41.316
+And this work was led by my PhD students, so Chan together
+
+00:14:41.316 --> 00:14:45.020
+with collaborators Amir Gul Yahan, Gloria Gang and Wu and
+
+00:14:45.020 --> 00:14:49.000
+myself, a Java outside advisor.

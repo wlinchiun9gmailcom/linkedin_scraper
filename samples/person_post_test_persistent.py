@@ -1,4 +1,5 @@
 import asyncio
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -7,17 +8,77 @@ from linkedin_scraper import PersistentBrowserManager
 from linkedin_scraper.core.exceptions import RateLimitError
 
 
-EXCEL_PATH = r"C:\2025-2026 Berkeley\Spring\BAIR\1 - Cross Platform Project\Linkedin Scraping\openreview_verified_conference_authors_2021_2025_debug_final_with_twitter (2).xlsx"
-OUTPUT_PATH = r"C:\2025-2026 Berkeley\Spring\BAIR\1 - Cross Platform Project\Linkedin Scraping\openreview_verified_conference_authors_2021_2025_debug_final_with_twitter (2).xlsx"
+EXCEL_PATH = r"C:\2025-2026 Berkeley\Spring\BAIR\1 - Cross Platform Project\Linkedin Scraping\both_linkedin_and_twitter.xlsx"
+OUTPUT_PATH = r"C:\2025-2026 Berkeley\Spring\BAIR\1 - Cross Platform Project\Linkedin Scraping\both_linkedin_and_twitter.xlsx"
 
 LINKEDIN_URL_COLUMN = "LinkedIn URL"
 OUTPUT_COLUMN = "LinkedIn Text"
 
 POST_LIMIT = 5
 
-# inclusive row bounds, 0-indexed
-START_ROW = 0
-END_ROW = 1000
+# Inclusive row bounds, 0-indexed
+START_ROW = 96
+END_ROW = 13299
+
+
+def sanitize_for_excel(text: str) -> str:
+    """
+    Remove characters that openpyxl / Excel worksheet cells do not allow.
+    """
+    if not isinstance(text, str):
+        return text
+
+    illegal_chars = ''.join(
+        chr(i) for i in list(range(0, 9)) + [11, 12] + list(range(14, 32))
+    )
+    translation_table = str.maketrans('', '', illegal_chars)
+    return text.translate(translation_table)
+
+
+def clean_post_text(text: str) -> str:
+    text = text.strip()
+
+    # Remove trailing collapsed-text artifacts
+    text = re.sub(r'(?:\.\.\.|…)\s*more\s*$', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bsee more\b\s*$', '', text, flags=re.IGNORECASE)
+
+    # Normalize excessive blank lines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+
+    text = sanitize_for_excel(text)
+    return text.strip()
+
+
+async def expand_see_more(card):
+    """
+    Click any visible '...more' / 'see more' buttons inside a post card
+    so we extract the full post text instead of the truncated preview.
+    """
+    selectors = [
+        'button[aria-label*="more" i]',
+        'button[aria-label*="see more" i]',
+        '.feed-shared-inline-show-more-text__see-more-less-toggle',
+        '.lt-line-clamp__more',
+        'button:has-text("…more")',
+        'button:has-text("...more")',
+        'button:has-text("more")',
+    ]
+
+    for selector in selectors:
+        try:
+            buttons = card.locator(selector)
+            count = await buttons.count()
+
+            for i in range(count):
+                btn = buttons.nth(i)
+                try:
+                    if await btn.is_visible():
+                        await btn.click(timeout=1500)
+                        await card.page.wait_for_timeout(300)
+                except Exception:
+                    pass
+        except Exception:
+            pass
 
 
 async def is_original_post(card) -> bool:
@@ -59,8 +120,10 @@ async def is_original_post(card) -> bool:
 
 async def extract_post_text(card) -> str:
     """
-    Try a few likely selectors for the user's own post text.
+    Expand the post, then extract only the author's own post text.
     """
+    await expand_see_more(card)
+
     text_selectors = [
         ".feed-shared-update-v2__description",
         ".update-components-text",
@@ -75,12 +138,12 @@ async def extract_post_text(card) -> str:
             if await locator.count() > 0:
                 text = (await locator.inner_text()).strip()
                 if text:
-                    return text
+                    return clean_post_text(text)
         except Exception:
             pass
 
     try:
-        return (await card.inner_text()).strip()
+        return clean_post_text((await card.inner_text()).strip())
     except Exception:
         return ""
 
@@ -128,6 +191,7 @@ async def get_original_posts(browser, profile_url: str, post_limit: int = 5):
             card = cards.nth(i)
 
             try:
+                await expand_see_more(card)
                 is_original = await is_original_post(card)
                 text = await extract_post_text(card)
                 preview = text[:160].replace("\n", " ")
@@ -223,7 +287,8 @@ async def main():
                 posts = await get_original_posts(browser, profile_url, POST_LIMIT)
 
                 separator = "\n\n" + ("-" * 100) + "\n\n"
-                df.at[idx, OUTPUT_COLUMN] = separator.join(posts) if posts else ""
+                joined_text = separator.join(posts) if posts else ""
+                df.at[idx, OUTPUT_COLUMN] = sanitize_for_excel(joined_text)
 
                 print(f"Row {idx}: saved {len(posts)} original posts")
 
@@ -235,8 +300,16 @@ async def main():
                 df.at[idx, OUTPUT_COLUMN] = ""
 
             # Save progress after each row in case the run gets interrupted
-            df.to_excel(output_path, index=False)
-            print(f"Progress saved to: {output_path}")
+            try:
+                df.to_excel(output_path, index=False)
+                print(f"Progress saved to: {output_path}")
+            except Exception as e:
+                print(f"Excel save failed at row {idx}: {e}")
+                cell_value = df.at[idx, OUTPUT_COLUMN]
+                preview = repr(cell_value[:500]) if isinstance(cell_value, str) else repr(cell_value)
+                print("Problematic text preview:")
+                print(preview)
+                raise
 
     df.to_excel(output_path, index=False)
     print(f"\nDone. Final output saved to: {output_path}")

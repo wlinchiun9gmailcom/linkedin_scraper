@@ -1,0 +1,793 @@
+WEBVTT
+
+00:00:00.060 --> 00:00:02.558
+Alex, thank you very much for your time. Look, this is a
+
+00:00:02.558 --> 00:00:04.838
+big raise, really significant. Talk to us about the
+
+00:00:04.838 --> 00:00:07.469
+significance of this raise and how it sets up wave AI going
+
+00:00:07.469 --> 00:00:08.480
+forward.
+
+00:00:08.480 --> 00:00:11.673
+It's a huge privilege for us. We've been working on this
+
+00:00:11.673 --> 00:00:15.035
+technology for a decade and pioneering end to end AI is the
+
+00:00:15.035 --> 00:00:18.228
+future for autonomy. And this raise for us is one that's
+
+00:00:18.228 --> 00:00:21.365
+hugely validating for our approach. We've got ecosystem
+
+00:00:21.365 --> 00:00:24.447
+partners from some of the best in the capital markets,
+
+00:00:24.447 --> 00:00:27.752
+partners throughout the tech ecosystem and of course, 3 of
+
+00:00:27.752 --> 00:00:31.058
+the largest OEM's, largest car companies backing us to now
+
+00:00:31.058 --> 00:00:34.195
+move into a phase of commercialization. And how does it
+
+00:00:34.195 --> 00:00:37.389
+shift that effort to scale commercially your technology?
+
+00:00:37.389 --> 00:00:38.870
+Well, look, I think it's.
+
+00:00:38.870 --> 00:00:42.129
+Clear that autonomy is is now coming to market in a massive
+
+00:00:42.129 --> 00:00:45.334
+way, but there are three different business models you can
+
+00:00:45.334 --> 00:00:48.485
+choose to to bring Autonomy to market with. Of course you
+
+00:00:48.485 --> 00:00:51.744
+can try and sell your own car, you can try and operate your
+
+00:00:51.744 --> 00:00:55.004
+own robotaxi service, but we've chosen the largest business
+
+00:00:55.004 --> 00:00:57.937
+model of them all, which is licensing our embodied AI
+
+00:00:57.937 --> 00:01:01.034
+software to fleets and automakers around the world. What
+
+00:01:01.034 --> 00:01:04.022
+gives you the conviction that that business model, the
+
+00:01:04.022 --> 00:01:07.281
+licensing approach is the right one versus your competitors
+
+00:01:07.281 --> 00:01:09.140
+lightweight mode? Well, firstly.
+
+00:01:09.140 --> 00:01:12.286
+Gives you the largest addressable market, right? This means
+
+00:01:12.286 --> 00:01:15.222
+you can bring it to any vehicle that moves. This is not
+
+00:01:15.222 --> 00:01:18.159
+just the cars that you sell, not just the cars that you
+
+00:01:18.159 --> 00:01:21.305
+operate, but literally it can enable any automaker or fleet
+
+00:01:21.305 --> 00:01:24.189
+to use it. But it also hasn't been a model that's been
+
+00:01:24.189 --> 00:01:27.336
+available in the past because previous autonomous vehicles,
+
+00:01:27.336 --> 00:01:29.905
+they required a specific hardware sensors and an
+
+00:01:29.905 --> 00:01:32.894
+architecture that they're built for. This was the AV 1.0
+
+00:01:32.894 --> 00:01:36.041
+approach that required HD maps to pre map environments. But
+
+00:01:36.041 --> 00:01:39.120
+what we've built is a complete transformation from there.
+
+00:01:39.120 --> 00:01:42.111
+Enables us to build an AI that has the intelligence to
+
+00:01:42.111 --> 00:01:45.319
+drive any vehicle anywhere. And we've proven that over the
+
+00:01:45.319 --> 00:01:48.419
+last year, we've driven our vehicles around Europe, Asia
+
+00:01:48.419 --> 00:01:51.682
+and North America and over 500 cities. We've now integrated
+
+00:01:51.682 --> 00:01:54.728
+into 10 different types of vehicles. And so we've shown
+
+00:01:54.728 --> 00:01:57.882
+that with this new approach, you can now build a platform
+
+00:01:57.882 --> 00:02:01.145
+that can generalize to many different customers. And you've
+
+00:02:01.145 --> 00:02:04.191
+had your partnership with Nissan over in Japan. Now you
+
+00:02:04.191 --> 00:02:07.399
+have still Lantis and you have Mercedes-Benz as investors,
+
+00:02:07.399 --> 00:02:09.210
+but also as commercial partners.
+
+00:02:09.210 --> 00:02:12.245
+As well, what is the nature of those deals? Are these pilot
+
+00:02:12.245 --> 00:02:15.230
+deals or these full commercial deals that you have now are
+
+00:02:15.230 --> 00:02:18.114
+still Lantis and Mercedes? Ohh, this is, I mean, this is
+
+00:02:18.114 --> 00:02:20.897
+fantastic. We're, we're so excited about deepening our
+
+00:02:20.897 --> 00:02:23.781
+relationships with these three automakers in this round.
+
+00:02:23.781 --> 00:02:26.816
+They've been really great partners to us. And across all of
+
+00:02:26.816 --> 00:02:29.852
+them, you have three of three of the ten largest automakers
+
+00:02:29.852 --> 00:02:32.635
+there from Europe, Japan, North America, spanning mass
+
+00:02:32.635 --> 00:02:35.670
+market to luxury vehicles. And this really demonstrates the
+
+00:02:35.670 --> 00:02:38.655
+breadth of capabilities that our AI has, but we're excited
+
+00:02:38.655 --> 00:02:40.090
+to be working with them.
+
+00:02:40.090 --> 00:02:43.000
+Towards not just consumer vehicles that you can buy, but
+
+00:02:43.000 --> 00:02:46.012
+also robo taxis we work with the cars they build work with
+
+00:02:46.012 --> 00:02:48.973
+the embedded hardware they have and make sure that AI has
+
+00:02:48.973 --> 00:02:51.934
+the intelligence to drive their vehicles. What So what is
+
+00:02:51.934 --> 00:02:54.385
+the biggest you've got the capital, you got the
+
+00:02:54.385 --> 00:02:57.244
+partnerships. What is the biggest constraint to scaling
+
+00:02:57.244 --> 00:03:00.154
+right now is it is it data is it access to chips is it a
+
+00:03:00.154 --> 00:03:03.166
+regulatory framework What kind of top of the list in terms
+
+00:03:03.166 --> 00:03:06.178
+of constraints on scaling Well, look a couple of years ago
+
+00:03:06.178 --> 00:03:09.088
+we had a really performance end to end AI system driving
+
+00:03:09.088 --> 00:03:10.190
+around and the last.
+
+00:03:10.190 --> 00:03:12.999
+Couple of years, what we've built out is really what it
+
+00:03:12.999 --> 00:03:16.009
+takes to go from a technology administration into a product.
+
+00:03:16.009 --> 00:03:18.818
+And part of that's been scaling the team, building out
+
+00:03:18.818 --> 00:03:21.828
+organisations in Germany, Japan and the US to work with our
+
+00:03:21.828 --> 00:03:24.687
+customers, figuring out how to prove that the safety and
+
+00:03:24.687 --> 00:03:27.597
+actually measure the performance of our end to end AI and
+
+00:03:27.597 --> 00:03:30.406
+making sure it can work with mass market consumer grade
+
+00:03:30.406 --> 00:03:33.366
+hardware. These have been extraordinary efforts that we've
+
+00:03:33.366 --> 00:03:36.225
+had to go through in the last couple of years to make it
+
+00:03:36.225 --> 00:03:39.040
+ready for commercialization.
+
+00:03:39.040 --> 00:03:41.767
+So I mean, that's, that's been the, the, the main thing
+
+00:03:41.767 --> 00:03:44.641
+that is, is that is growing, growing, growing the team and
+
+00:03:44.641 --> 00:03:47.271
+now it's all about integrating it and deploying it in
+
+00:03:47.271 --> 00:03:50.096
+trials. So for robo taxis this year we're gonna launch in
+
+00:03:50.096 --> 00:03:52.872
+London and then grow to 10 markets, 10 cities around the
+
+00:03:52.872 --> 00:03:55.599
+world with Uber. Yeah. And there that's about deploying
+
+00:03:55.599 --> 00:03:58.376
+trials, supervised robot taxis to begin with with safety
+
+00:03:58.376 --> 00:04:00.957
+operators. But once we have integration to the right
+
+00:04:00.957 --> 00:04:03.684
+vehicle regulatory approval and proving that it's safer
+
+00:04:03.684 --> 00:04:06.558
+than than human drivers, then of course we'll be launching
+
+00:04:06.558 --> 00:04:09.210
+this as a as a service. What is the what is the time?
+
+00:04:09.210 --> 00:04:12.551
+And you're looking at with Uber to get to get to that point
+
+00:04:12.551 --> 00:04:15.670
+where it's fully, fully on the market. Well, this is an
+
+00:04:15.670 --> 00:04:18.844
+exciting, I think it's gonna be a world first trial that
+
+00:04:18.844 --> 00:04:21.796
+we're doing together because Uber, of course are the
+
+00:04:21.796 --> 00:04:25.081
+largest mobility platform in the world and we can uniquely
+
+00:04:25.081 --> 00:04:28.423
+offer them autonomy and all of the major areas they operate
+
+00:04:28.423 --> 00:04:31.708
+in with any vehicle they want to work with from, you know,
+
+00:04:31.708 --> 00:04:34.938
+different products like X to excel. And so we're going to
+
+00:04:34.938 --> 00:04:38.280
+be deploying firstly here in London, but then scaling to to
+
+00:04:38.280 --> 00:04:39.220
+10 cities and.
+
+00:04:39.220 --> 00:04:42.021
+And as I mentioned, it's, it's these three things that let
+
+00:04:42.021 --> 00:04:44.869
+us go driverless. It's the vehicle integration, making sure
+
+00:04:44.869 --> 00:04:47.670
+that we integrate into vehicles with our OEM partners that
+
+00:04:47.670 --> 00:04:50.519
+have the right equipment to go driverless. It's regulation.
+
+00:04:50.519 --> 00:04:53.368
+We've we've had some really great work working closely with
+
+00:04:53.368 --> 00:04:56.169
+the UN and global regulators and to make sure that our end
+
+00:04:56.169 --> 00:04:58.970
+to end AI, we can bring the evidence forward to prove that
+
+00:04:58.970 --> 00:05:01.296
+this is safe. And then finally, it's showing the
+
+00:05:01.296 --> 00:05:04.097
+performance. And the good news there is that with each new
+
+00:05:04.097 --> 00:05:06.804
+deployment, we just get better with experience as our AI
+
+00:05:06.804 --> 00:05:09.652
+continues to learn from all of the data. So look, look this
+
+00:05:09.652 --> 00:05:10.230
+industry.
+
+00:05:10.230 --> 00:05:12.944
+And not wave out, but the industry has over promised on
+
+00:05:12.944 --> 00:05:15.707
+full autonomous. So I I understand your hesitance around
+
+00:05:15.707 --> 00:05:19.190
+putting a time frame on it, but do we get to for example.
+
+00:05:19.190 --> 00:05:22.150
+An Uber robo taxi powered by wave AI, fully autonomous that
+
+00:05:22.150 --> 00:05:24.814
+we can order. Does that happen before the end of this
+
+00:05:24.814 --> 00:05:26.020
+decade?
+
+00:05:26.020 --> 00:05:28.834
+Before the end of the decade, for sure. That's what we're
+
+00:05:28.834 --> 00:05:31.698
+building towards. I think this year is all about deploying
+
+00:05:31.698 --> 00:05:34.464
+the trials, yeah, and integrating into our OEM vehicles.
+
+00:05:34.464 --> 00:05:37.376
+But in a couple of years time, we're gonna start to be in a
+
+00:05:37.376 --> 00:05:40.045
+world where this really, you know, really is a case of
+
+00:05:40.045 --> 00:05:42.860
+scaling because it's not is it driverless or not that you
+
+00:05:42.860 --> 00:05:45.772
+could do in a small constrained area. But what is the scale
+
+00:05:45.772 --> 00:05:48.587
+of driverless? It's possible. What is the the operational
+
+00:05:48.587 --> 00:05:51.208
+domain? And there this really comes down to does your
+
+00:05:51.208 --> 00:05:54.071
+technology need to go city by city, map by map? No, that's
+
+00:05:54.071 --> 00:05:56.220
+not how we approach it. And then secondly.
+
+00:05:56.220 --> 00:05:59.089
+How do you mess manufacture these robo taxis? I mean, we're
+
+00:05:59.089 --> 00:06:01.863
+again, we're not retrofitting, which is capital intensive
+
+00:06:01.863 --> 00:06:04.398
+and slow. We've got a high margin software licensing
+
+00:06:04.398 --> 00:06:07.220
+business that works with the very largest manufacturers in
+
+00:06:07.220 --> 00:06:09.899
+the world. And so I think these are the questions to be
+
+00:06:09.899 --> 00:06:12.673
+asking about how this technology scales because the KPI's
+
+00:06:12.673 --> 00:06:15.303
+are going to come the rate that our AI is learning and
+
+00:06:15.303 --> 00:06:18.029
+increasing in performance is only accelerating with with
+
+00:06:18.029 --> 00:06:20.564
+the more deployment. And to to your point, this is a
+
+00:06:20.564 --> 00:06:23.243
+competition about which technology stack works best and
+
+00:06:23.243 --> 00:06:25.921
+you're, you're you're throwing shade on Waymo with that
+
+00:06:25.921 --> 00:06:26.470
+with that.
+
+00:06:26.470 --> 00:06:29.254
+Last answer, how, how much of A competitive threat is, is
+
+00:06:29.254 --> 00:06:32.135
+wait mate, they start testing later this year and a rollout
+
+00:06:32.135 --> 00:06:35.015
+later this year in, in London? Well, I, I think competition
+
+00:06:35.015 --> 00:06:37.512
+is healthy and, and we're really excited to see our
+
+00:06:37.512 --> 00:06:40.200
+products go head to head. I think it's going to be, you
+
+00:06:40.200 --> 00:06:43.033
+know, wonderful for consumers in our industry, but it's a,
+
+00:06:43.033 --> 00:06:45.721
+isn't that a an amazing spot to be in after a decade of
+
+00:06:45.721 --> 00:06:48.122
+building this, that now we have some, some viable
+
+00:06:48.122 --> 00:06:50.858
+approaches here, but the question is what is going to be
+
+00:06:50.858 --> 00:06:53.643
+the model that scales most effectively? And that's really
+
+00:06:53.643 --> 00:06:56.187
+where we've looked to be thoughtful about technology
+
+00:06:56.187 --> 00:06:56.690
+approach.
+
+00:06:56.690 --> 00:06:59.745
+I mean, we started in London, one of the hardest cities to
+
+00:06:59.745 --> 00:07:02.698
+drive there. Yeah, London has more than 10 times the the
+
+00:07:02.698 --> 00:07:05.702
+road length than San Francisco. It has more than 10 times
+
+00:07:05.702 --> 00:07:08.758
+the cyclists and pedestrians than in San Francisco. It's a
+
+00:07:08.758 --> 00:07:11.762
+really complex environment to drive in. And our belief is
+
+00:07:11.762 --> 00:07:14.818
+that an AI approach, an end to end AI approach is going to
+
+00:07:14.818 --> 00:07:17.615
+be what lets you scale and one that could be natively
+
+00:07:17.615 --> 00:07:20.567
+integrated into manufacturers, vehicles themselves. You,
+
+00:07:20.567 --> 00:07:23.571
+you've raised 1 1/2 billion U.S. dollars in this, in this
+
+00:07:23.571 --> 00:07:26.420
+latest round. Are we seeing a capital arms race around
+
+00:07:26.420 --> 00:07:27.070
+autonomous?
+
+00:07:27.070 --> 00:07:29.080
+Systems.
+
+00:07:29.080 --> 00:07:32.306
+I think that we're seeing a a recognition from investors
+
+00:07:32.306 --> 00:07:35.645
+that this is no longer a science project, that this is now
+
+00:07:35.645 --> 00:07:38.701
+a technology that consumers love. I mean, you look at
+
+00:07:38.701 --> 00:07:41.984
+people, what people are doing in San Francisco preferring
+
+00:07:41.984 --> 00:07:45.323
+to ride and robo taxis, even though they might have longer
+
+00:07:45.323 --> 00:07:48.606
+wait times or slower journeys, it's still a loved product
+
+00:07:48.606 --> 00:07:52.001
+where you look at the adoption rates for FSD with Tesla now
+
+00:07:52.001 --> 00:07:55.171
+seeing billions of recurring revenue. I mean, this is a
+
+00:07:55.171 --> 00:07:58.567
+technology product that people love, they're willing to pay
+
+00:07:58.567 --> 00:07:59.090
+for and.
+
+00:07:59.090 --> 00:08:02.445
+We're now seeing with this new approach that we've built a
+
+00:08:02.445 --> 00:08:05.516
+possibility to bring this to mass market vehicles all
+
+00:08:05.516 --> 00:08:08.871
+around the world. So I think we're seeing a recognition of
+
+00:08:08.871 --> 00:08:12.283
+this shift in in movement towards a commercialization phase.
+
+00:08:12.283 --> 00:08:15.581
+On safety, how do you convince regulators that your data
+
+00:08:15.581 --> 00:08:18.936
+and that your models are explainable and interpretable and
+
+00:08:18.936 --> 00:08:20.580
+therefore safe?
+
+00:08:20.580 --> 00:08:23.448
+Well, this has been I think one of the key things that
+
+00:08:23.448 --> 00:08:26.421
+we're focused on in the last couple of years is changing
+
+00:08:26.421 --> 00:08:29.498
+making sure our embodied AI product is safe and compliant.
+
+00:08:29.498 --> 00:08:32.158
+And we've done that by working with the regulators
+
+00:08:32.158 --> 00:08:35.026
+themselves. We Co chair the UN committee towards these
+
+00:08:35.026 --> 00:08:38.155
+regulations. We just had a major breakthrough last month in
+
+00:08:38.155 --> 00:08:41.076
+technical regulations for the global deployment of both
+
+00:08:41.076 --> 00:08:44.205
+consumer and robo taxis for autonomy. But really it's about
+
+00:08:44.205 --> 00:08:47.022
+making sure that regulators are set up to receive the
+
+00:08:47.022 --> 00:08:50.099
+evidence and then it's our job to create the evidence that
+
+00:08:50.099 --> 00:08:50.440
+they.
+
+00:08:50.440 --> 00:08:53.393
+And they can interpret and then certify with. And so we've
+
+00:08:53.393 --> 00:08:56.197
+built an A range of tools and and an array of tools and
+
+00:08:56.197 --> 00:08:59.101
+measurement capabilities to be able to understand how our
+
+00:08:59.101 --> 00:09:01.854
+end to end AI performs and to be able to find and root
+
+00:09:01.854 --> 00:09:04.808
+cause and root fix systems so it can continuously improve.
+
+00:09:04.808 --> 00:09:07.712
+The concern from some is that this is essentially a black
+
+00:09:07.712 --> 00:09:10.666
+box and it, it, it can't be explainable, but you're saying
+
+00:09:10.666 --> 00:09:13.670
+you can lift the lid on that box for regulators. Absolutely.
+
+00:09:13.670 --> 00:09:16.624
+I mean, when you're building a system that I think is the
+
+00:09:16.624 --> 00:09:19.528
+greatest engineering challenge and an embodied AI system,
+
+00:09:19.528 --> 00:09:21.100
+it's gonna be extraordinarily.
+
+00:09:21.100 --> 00:09:24.149
+Complex in its itself. So, you know, whatever approach you
+
+00:09:24.149 --> 00:09:27.251
+take, it's going to be a complex 1. And that's why we spend
+
+00:09:27.251 --> 00:09:30.352
+time really building the tools and techniques to be able to
+
+00:09:30.352 --> 00:09:33.350
+understand how it performs and be able to present that to
+
+00:09:33.350 --> 00:09:36.349
+regulators. And so I don't think it's maybe 5 or 10 years
+
+00:09:36.349 --> 00:09:39.295
+ago you could have said in to end AI as a black box, but
+
+00:09:39.295 --> 00:09:42.241
+the work that we've done to build their understanding, I
+
+00:09:42.241 --> 00:09:45.033
+think has shifted that conversation. That's now a, an
+
+00:09:45.033 --> 00:09:48.083
+outdated claim. And, and you've talked about the fact that
+
+00:09:48.083 --> 00:09:51.184
+you are building a platform for embodied AI, which suggests
+
+00:09:51.184 --> 00:09:52.030
+your ambitions.
+
+00:09:52.030 --> 00:09:53.680
+But well beyond.
+
+00:09:53.680 --> 00:09:56.795
+Cars and robo taxis, this is about broader adaptation and
+
+00:09:56.795 --> 00:09:59.857
+integration of AI solutions in hardware. Are you are you
+
+00:09:59.857 --> 00:10:03.026
+having conversations with with, with robot makers? Are you
+
+00:10:03.026 --> 00:10:05.980
+having those have you started conversations like this?
+
+00:10:05.980 --> 00:10:08.988
+Because I know your ambitions are larger even than than
+
+00:10:08.988 --> 00:10:12.050
+addressing robo taxis and and and autonomous vehicles. I
+
+00:10:12.050 --> 00:10:15.058
+think the the transition to autonomy is going to be the
+
+00:10:15.058 --> 00:10:18.281
+biggest change that we go through in this coming generation.
+
+00:10:18.281 --> 00:10:21.557
+And what's great about our system is everything we've built
+
+00:10:21.557 --> 00:10:23.860
+is for generalization. That doesn't mean.
+
+00:10:23.860 --> 00:10:26.983
+Just adapting to new cities or new vehicles but also new
+
+00:10:26.983 --> 00:10:30.162
+use cases but the fact is is that automotive is happening
+
+00:10:30.162 --> 00:10:33.340
+you know a decade before these other spaces like humanoid
+
+00:10:33.340 --> 00:10:36.190
+robotics, healthcare, manufacturing robotics and in
+
+00:10:36.190 --> 00:10:39.478
+automotive we have global supply chain availability of data
+
+00:10:39.478 --> 00:10:42.766
+around the world yeah we have regulation in place we have a
+
+00:10:42.766 --> 00:10:45.780
+partial to full autonomy use case and and all of these
+
+00:10:45.780 --> 00:10:48.849
+factors mean that and actually most importantly we have
+
+00:10:48.849 --> 00:10:52.028
+software defined vehicles, vehicles that have centralised
+
+00:10:52.028 --> 00:10:54.400
+compute and access to all the sensors and.
+
+00:10:54.400 --> 00:10:57.143
+Situated as being produced at not just millions, 10s of
+
+00:10:57.143 --> 00:10:59.886
+millions of units scale a year. So all of these factors
+
+00:10:59.886 --> 00:11:02.776
+mean that automotive is going to happen first, but doesn't
+
+00:11:02.776 --> 00:11:05.715
+mean it's gonna be the end. And of course the experience we
+
+00:11:05.715 --> 00:11:08.654
+have deploying this in in automotive first, we'll set us up
+
+00:11:08.654 --> 00:11:11.446
+really well to expand into other spaces. And you've also
+
+00:11:11.446 --> 00:11:14.386
+you've also made it look this is a software first approach.
+
+00:11:14.386 --> 00:11:17.031
+We've seen a massive sell off in software stocks as a
+
+00:11:17.031 --> 00:11:19.725
+result of the destruction from AI. Has that led to any
+
+00:11:19.725 --> 00:11:22.566
+questioning that that is the right approach? Have you had
+
+00:11:22.566 --> 00:11:24.930
+any investors putting pressure on in terms of.
+
+00:11:24.930 --> 00:11:27.940
+Proving that you can be generating recurring revenue and
+
+00:11:27.940 --> 00:11:30.898
+and profitability. I don't think anyone has questioning
+
+00:11:30.898 --> 00:11:34.066
+that autonomy is gonna be in every vehicle in the future. I
+
+00:11:34.066 --> 00:11:37.235
+think that's very clear to the market now. Every vehicle is
+
+00:11:37.235 --> 00:11:40.298
+going to be autonomous. The question is what is the right
+
+00:11:40.298 --> 00:11:43.309
+Technology Strategy and what is the right business model
+
+00:11:43.309 --> 00:11:46.266
+And you'll have pricing power 100%. I mean, this is not
+
+00:11:46.266 --> 00:11:49.435
+just building the, the autonomy technology, which of course
+
+00:11:49.435 --> 00:11:52.340
+is the critical part today and is something that we've
+
+00:11:52.340 --> 00:11:54.940
+we've pioneered over the last decade, but now.
+
+00:11:54.940 --> 00:11:57.676
+It's about turning that into, of course, as I mentioned,
+
+00:11:57.676 --> 00:12:00.413
+how do we build a compliant product, How do we work with
+
+00:12:00.413 --> 00:12:03.198
+regulators to make sure this is accepted? How do we build
+
+00:12:03.198 --> 00:12:05.983
+relationships with automakers around the world? How do we
+
+00:12:05.983 --> 00:12:08.672
+build up the data and the experience to build a product
+
+00:12:08.672 --> 00:12:11.409
+that's trusted and loved and the most cost effective for
+
+00:12:11.409 --> 00:12:14.098
+for all these different products. Those are the kind of
+
+00:12:14.098 --> 00:12:16.978
+structural advantages that we're gonna see come in the next
+
+00:12:16.978 --> 00:12:19.811
+couple of years that are just gonna increase our lead over
+
+00:12:19.811 --> 00:12:22.340
+incumbents.
